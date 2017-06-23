@@ -19,6 +19,7 @@ return [
             'identityClass' => 'frontend\models\Member',  //设置实现认证接口的类
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'authTimeout'=>6000,
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -44,6 +45,14 @@ return [
             'rules' => [
             ],
         ],
+        //配置短信组件
+        'sms'=>[
+            'class'=>\frontend\components\Message::className(),
+            'app_key'=>'24489135',
+            'app_secret'=>'7e7044a47bbc0a492a4c0e0df9234e66',
+            'sign_name'=>'施刘凡网站',
+            'template_code'=>'SMS_71890150',
+        ]
 
     ],
     'params' => $params,

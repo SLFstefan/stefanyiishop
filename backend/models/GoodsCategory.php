@@ -19,6 +19,10 @@ use creocoder\nestedsets\NestedSetsBehavior;
  */
 class GoodsCategory extends \yii\db\ActiveRecord
 {
+    //获取当前分类的子分类
+    public function getChildren(){
+        return $this->hasMany(self::className(),['parent_id'=>'id']);
+    }
     /**
      * @inheritdoc
      */

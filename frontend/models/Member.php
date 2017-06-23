@@ -30,6 +30,8 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
     public $repassword;
     //自动登录
     public $cookie;
+    public $messageCode;
+    const SCENARIO_REGISTER='register';
     /**
      * @inheritdoc
      */
@@ -44,16 +46,27 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username','password','email','repassword','tel'],'required'],
+            [['username','email','tel'],'required'],
+            [['password','repassword','messageCode'],'required','on'=>self::SCENARIO_REGISTER],
             [['last_login_time', 'last_login_ip', 'status', 'created_at', 'updated_at'], 'integer'],
             [['username'], 'string', 'max' => 50],
             [['auth_key'], 'string', 'max' => 32],
             [['password_hash', 'email'], 'string', 'max' => 100],
             [['tel'], 'string', 'max' => 11],
-            [['code'],'captcha'],
-            [['repassword'], 'compare','compareAttribute'=>'password'],
+            [['code'],'captcha','on'=>self::SCENARIO_REGISTER],
+            [['repassword'], 'compare','compareAttribute'=>'password','on'=>self::SCENARIO_REGISTER],
             [['cookie'],'safe'],
+            //验证短信验证码
+            ['messageCode','validateMessage','on'=>self::SCENARIO_REGISTER]
         ];
+    }
+    //验证短信验证码
+    public function validateMessage(){
+        //缓存里面没有该验证码
+        $value = Yii::$app->cache->get('tel_'.$this->tel);
+        if(!$value || $this->messageCode != $value){
+            $this->addError('messageCode','验证码不正确');
+        }
     }
 
     /**
@@ -77,6 +90,7 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             'code'=>'验证码',
             'repassword'=>'确认密码 ',
             'cookie'=>'保存登录信息',
+            'messageCode'=>'短信验证',
         ];
     }
 

@@ -8,268 +8,7 @@
         </div>
 
         <div class="cat_bd none">
-
-            <div class="cat item1">
-                <h3><a href="">图像、音像、数字商品</a> <b></b></h3>
-                <div class="cat_detail">
-                    <dl class="dl_1st">
-                        <dt><a href="">电子书</a></dt>
-                        <dd>
-                            <a href="">免费</a>
-                            <a href="">小说</a>
-                            <a href="">励志与成功</a>
-                            <a href="">婚恋/两性</a>
-                            <a href="">文学</a>
-                            <a href="">经管</a>
-                            <a href="">畅读VIP</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">数字音乐</a></dt>
-                        <dd>
-                            <a href="">通俗流行</a>
-                            <a href="">古典音乐</a>
-                            <a href="">摇滚说唱</a>
-                            <a href="">爵士蓝调</a>
-                            <a href="">乡村民谣</a>
-                            <a href="">有声读物</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">音像</a></dt>
-                        <dd>
-                            <a href="">音乐</a>
-                            <a href="">影视</a>
-                            <a href="">教育音像</a>
-                            <a href="">游戏</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">文艺</a></dt>
-                        <dd>
-                            <a href="">小说</a>
-                            <a href="">文学</a>
-                            <a href="">青春文学</a>
-                            <a href="">传纪</a>
-                            <a href="">艺术</a>
-                            <a href="">经管</a>
-                            <a href="">畅读VIP</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">人文社科</a></dt>
-                        <dd>
-                            <a href="">历史</a>
-                            <a href="">心理学</a>
-                            <a href="">政治/军事</a>
-                            <a href="">国学/古籍</a>
-                            <a href="">哲学/宗教</a>
-                            <a href="">社会科学</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">经管励志</a></dt>
-                        <dd>
-                            <a href="">经济</a>
-                            <a href="">金融与投资</a>
-                            <a href="">管理</a>
-                            <a href="">励志与成功</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">人文社科</a></dt>
-                        <dd>
-                            <a href="">历史</a>
-                            <a href="">心理学</a>
-                            <a href="">政治/军事</a>
-                            <a href="">国学/古籍</a>
-                            <a href="">哲学/宗教</a>
-                            <a href="">社会科学</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">生活</a></dt>
-                        <dd>
-                            <a href="">烹饪/美食</a>
-                            <a href="">时尚/美妆</a>
-                            <a href="">家居</a>
-                            <a href="">娱乐/休闲</a>
-                            <a href="">动漫/幽默</a>
-                            <a href="">体育/运动</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">科技</a></dt>
-                        <dd>
-                            <a href="">科普</a>
-                            <a href="">建筑</a>
-                            <a href="">IT</a>
-                            <a href="">医学</a>
-                            <a href="">工业技术</a>
-                            <a href="">电子/通信</a>
-                            <a href="">农林</a>
-                            <a href="">科学与自然</a>
-                        </dd>
-                    </dl>
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">家用电器</a><b></b></h3>
-                <div class="cat_detail">
-                    <dl class="dl_1st">
-                        <dt><a href="">大家电</a></dt>
-                        <dd>
-                            <a href="">平板电视</a>
-                            <a href="">空调</a>
-                            <a href="">冰箱</a>
-                            <a href="">洗衣机</a>
-                            <a href="">热水器</a>
-                            <a href="">DVD</a>
-                            <a href="">烟机/灶具</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">生活电器</a></dt>
-                        <dd>
-                            <a href="">取暖器</a>
-                            <a href="">加湿器</a>
-                            <a href="">净化器</a>
-                            <a href="">饮水机</a>
-                            <a href="">净水设备</a>
-                            <a href="">吸尘器</a>
-                            <a href="">电风扇</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">厨房电器</a></dt>
-                        <dd>
-                            <a href="">电饭煲</a>
-                            <a href="">豆浆机</a>
-                            <a href="">面包机</a>
-                            <a href="">咖啡机</a>
-                            <a href="">微波炉</a>
-                            <a href="">电磁炉</a>
-                            <a href="">电水壶</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">个护健康</a></dt>
-                        <dd>
-                            <a href="">剃须刀</a>
-                            <a href="">电吹风</a>
-                            <a href="">按摩器</a>
-                            <a href="">足浴盆</a>
-                            <a href="">血压计</a>
-                            <a href="">体温计</a>
-                            <a href="">血糖仪</a>
-                        </dd>
-                    </dl>
-
-                    <dl>
-                        <dt><a href="">五金家装</a></dt>
-                        <dd>
-                            <a href="">灯具</a>
-                            <a href="">LED灯</a>
-                            <a href="">水槽</a>
-                            <a href="">龙头</a>
-                            <a href="">门铃</a>
-                            <a href="">电器开关</a>
-                            <a href="">插座</a>
-                        </dd>
-                    </dl>
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">手机、数码</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">电脑、办公</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">家局、家具、家装、厨具</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">服饰鞋帽</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">个护化妆</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">礼品箱包、钟表、珠宝</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">运动健康</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">汽车用品</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">母婴、玩具乐器</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">食品饮料、保健食品</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
-            <div class="cat">
-                <h3><a href="">彩票、旅行、充值、票务</a><b></b></h3>
-                <div class="cat_detail none">
-
-                </div>
-            </div>
-
+            <?=\frontend\widgets\CategoryWidget::widget()?>
         </div>
 
     </div>
@@ -334,78 +73,140 @@
     <div class="content fl ml10">
         <div class="address_hd">
             <h3>收货地址薄</h3>
+            <?php foreach ($addresses as $address):?>
             <dl>
-                <dt>1.许坤 北京市 昌平区 仙人跳区 仙人跳大街 17002810530 </dt>
+                <dt><?=$address->id.'、'.$address->name.'—'.$address->province->name.'—'.$address->city->name.'—'.$address->area->name.'—'.$address->detail_address.'—'.$address->phone?></dt>
                 <dd>
-                    <a href="">修改</a>
-                    <a href="">删除</a>
-                    <a href="">设为默认地址</a>
+                    <a href="update-address.html?id=<?=$address->id?>">修改</a>
+                    <a href="del-address.html?id=<?=$address->id?>">删除</a>
+                    <a href="default-address.html?id=<?=$address->id?>">设为默认地址</a>
                 </dd>
             </dl>
-            <dl class="last"> <!-- 最后一个dl 加类last -->
-                <dt>2.许坤 四川省 成都市 高新区 仙人跳大街 17002810530 </dt>
-                <dd>
-                    <a href="">修改</a>
-                    <a href="">删除</a>
-                    <a href="">设为默认地址</a>
-                </dd>
-            </dl>
-
+            <?php endforeach;?>
         </div>
 
         <div class="address_bd mt10">
             <h4>新增收货地址</h4>
-            <form action="" name="address_form">
-                <ul>
-                    <li>
-                        <label for=""><span>*</span>收 货 人：</label>
-                        <input type="text" name="" class="txt" />
-                    </li>
-                    <li>
-                        <label for=""><span>*</span>所在地区：</label>
-                        <select name="" id="">
-                            <option value="">请选择</option>
-                            <option value="">北京</option>
-                            <option value="">上海</option>
-                            <option value="">天津</option>
-                            <option value="">重庆</option>
-                            <option value="">武汉</option>
-                        </select>
+            <?php
+            $form=\yii\widgets\ActiveForm::begin(
+                ['fieldConfig'=>[
+                    'options'=>[
+                        'tag'=>'li'
+                    ],
+                    'errorOptions'=>[
+                        'tag'=>'a'
+                    ]
+                ]]
+            );
+            echo '<ul>';
+            echo $form->field($model,'name')->textInput(['class'=>'txt']);
+            echo $form->field($model,'province_id')->hiddenInput();
+            echo $form->field($model,'city_id')->hiddenInput();
+            echo $form->field($model,'area_id')->hiddenInput();
+            echo '所在地区：<select name="province"><option>请选择省份</option></select><select name="city"><option>请选择城市</option></select><select name="area"><option>请选择区县</option></select>';
+            $province_id = $model->province_id;
+            $city_id=$model->city_id;
+            $area_id=$model->area_id;
+            $js=new \yii\web\JsExpression(
+                    <<<JS
+                //因为我们首先要选择省份，所以我们要准备省份数据
+			$(function(){
+				//因为查看省份的时候我们需要parent_id,所以我们要传一个parent_id给PHP
+				var data={
+					'id':0,
+				};
+				//因为我们要通过PHP从数据库读取数据，所以我们通过AJAX发送请求，从数据库读取数据
+				$.getJSON('read.html',data,function(response){
+					//因为PHP返回了多条数据，所以我们需要遍历response
+					$(response).each(function(i,v){
+					    if( v.id == $province_id){
+					         var html='<option value="'+v.id+'" selected>'+v.name+'</option>';  
+					    }else{
+					        //因为插入的文本可能会很长，所以我们将文本放入到一个变量中方便使用
+						    var html='<option value="'+v.id+'">'+v.name+'</option>';
+					    }
+					
+						//因为我们需要将数据放入select下拉框中，所以我们通过HTML将数据放入到下拉框中
+						$(html).appendTo('select[name=province]');
+					   
+					});
+					 $('select[name=province]').trigger("change");
+				});
+			});
+			//因为我们选择省份过后要选择市，所以我们要准备市数据，当省份的下拉框触发change事件时，我们视为选择了省份
+			$('select[name=province]').on('change',function(){
+				//因为重新选择省的时候，上一次所选择的省的市和区县没有清空，所以我们要清空上一次的市和区县
+				$('select[name=city]').find('option:not(:first)').remove();
+				//清空区县
+				$('select[name=area]').find('option:not(:first)').remove();
+				//因为选择市的时候我们需要省份的ID，所以我们需要传一个ID给php
+				var data={
+					'id':$(this).val(),
+				};
+				//获取省ID
+				$('#address-province_id').val($('select[name=province]').val());
+				//因为当我们选择请选择的时候，之前的选择没有赋空，所以我们要做一个判断
+				if($(this).val()==='请选择省份'){return false;}
+				//因为我们要通过PHP从数据库读取数据，所以我们通过AJAX发送请求，从数据库读取数据
+				$.getJSON('read.html',data,function(response){
+					//因为PHP返回了多条数据，所以我们需要遍历response
+					$(response).each(function(i,v){
+					        if( v.id==$city_id){
+					            var html='<option value="'+v.id+'" selected>'+v.name+'</option>';
+					        }else{
+					            //因为插入的文本可能会很长，所以我们将文本放入到一个变量中方便使用
+                                var html='<option value="'+v.id+'">'+v.name+'</option>';
+					        }
+						//因为我们需要将数据放入select下拉框中，所以我们通过HTML将数据放入到下拉框中
+						$(html).appendTo('select[name=city]');
+					});
+					$('select[name=city]').trigger("change");
+				});
+			});
+			//回显省份
+			//因为我们选择市过后要选择市，所以我们要准备区县数据，当市的下拉框触发change事件时，我们视为选择了市
+			$('select[name=city]').on('change',function(){
+				//因为重新选择市的时候，上一次所选择的市区县没有清空，所以我们要清空上一次的区县
+				$('select[name=area]').find('option:not(:first)').remove();
+				//因为选择区县的时候我们需要市的ID，所以我们需要传一个ID给php
+				var data={
+					'id':$(this).val(),
+				};
+				//获取市ID
+				$('#address-city_id').val($('select[name=city]').val());
+				//因为当我们选择请选择的时候，之前的选择没有赋空，所以我们要做一个判断
+				if($(this).val()==='请选择城市'){return false;}
+				//因为我们要通过PHP从数据库读取数据，所以我们通过AJAX发送请求，从数据库读取数据
+				$.getJSON('read.html',data,function(response){
+					//因为PHP返回了多条数据，所以我们需要遍历response
+					$(response).each(function(i,v){
+					    if( v.id==$area_id){
+					         var html='<option value="'+v.id+'" selected>'+v.name+'</option>';
+					    }else{
+					        //因为插入的文本可能会很长，所以我们将文本放入到一个变量中方便使用
+						    var html='<option value="'+v.id+'">'+v.name+'</option>';
+					    }
+						//因为我们需要将数据放入select下拉框中，所以我们通过HTML将数据放入到下拉框中
+						$(html).appendTo('select[name=area]');
+					});
+				});
+			});
+			$('select[name=area]').on('change',function(){
+			    //获取区县ID
+			    $('#address-area_id').val($('select[name=area]').val());
+			});
+JS
 
-                        <select name="" id="">
-                            <option value="">请选择</option>
-                            <option value="">朝阳区</option>
-                            <option value="">东城区</option>
-                            <option value="">西城区</option>
-                            <option value="">海淀区</option>
-                            <option value="">昌平区</option>
-                        </select>
-
-                        <select name="" id="">
-                            <option value="">请选择</option>
-                            <option value="">西二旗</option>
-                            <option value="">西三旗</option>
-                            <option value="">三环以内</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label for=""><span>*</span>详细地址：</label>
-                        <input type="text" name="" class="txt address"  />
-                    </li>
-                    <li>
-                        <label for=""><span>*</span>手机号码：</label>
-                        <input type="text" name="" class="txt" />
-                    </li>
-                    <li>
-                        <label for="">&nbsp;</label>
-                        <input type="checkbox" name="" class="check" />设为默认地址
-                    </li>
-                    <li>
-                        <label for="">&nbsp;</label>
-                        <input type="submit" name="" class="btn" value="保存" />
-                    </li>
-                </ul>
-            </form>
+            );
+            //加载js
+            $this->registerJs($js);
+            echo $form->field($model,'detail_address')->textInput(['class'=>'txt']);
+            echo $form->field($model,'phone')->textInput(['class'=>'txt']);
+            echo $form->field($model,'status')->checkbox();
+            echo '<li><label for="">&nbsp;</label><input type="submit" name="" class="btn" value="保存" /></li>';
+            echo '</ul>';
+            \yii\widgets\ActiveForm::end();
+            ?>
         </div>
 
     </div>

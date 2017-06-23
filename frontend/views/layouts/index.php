@@ -33,7 +33,12 @@ use common\widgets\Alert;
         </div>
         <div class="topnav_right fr">
             <ul>
-                <li>您好，欢迎来到京西！[<a href="login.html">登录</a>] [<a href="register.html">免费注册</a>] </li>
+                <?php if(Yii::$app->user->isGuest){?>
+                    <li>您好，欢迎来到京西！[<a href="login.html">登录</a>] [<a href="register.html">免费注册</a>] </li>
+                <?php }else{
+                    echo '<li class="prompt">京西会员：'.Yii::$app->user->identity->username;
+                    echo '[<a href="logout.html">注销登录</a>]</li>';
+                }?>
                 <li class="line">|</li>
                 <li>我的订单</li>
                 <li class="line">|</li>
@@ -88,15 +93,15 @@ use common\widgets\Alert;
                         您好，请<a href="login.html">登录</a>
                     </div>
                     <?php }else{
-                        echo '<div class="prompt">'.Yii::$app->user->identity->username.' :';
-                        echo '<a href="logout.html"><button style="background: darkseagreen">注销登录</button></a></div>';
+                        echo '<div class="prompt">'.Yii::$app->user->identity->username;
+                        echo '[<a href="logout.html">注销登录</a>]</div>';
                     }?>
 
                     <div class="uclist mt10">
                         <ul class="list1 fl">
                             <li><a href="">用户信息></a></li>
                             <li><a href="">我的订单></a></li>
-                            <li><a href="">收货地址></a></li>
+                            <li><a href="address.html">收货地址></a></li>
                             <li><a href="">我的收藏></a></li>
                         </ul>
 

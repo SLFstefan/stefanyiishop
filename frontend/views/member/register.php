@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Html;
+?>
 <!-- 登录主体部分start -->
 <div class="login w990 bc mt10 regist">
     <div class="login_hd">
@@ -23,6 +26,10 @@
             echo $form->field($model,'repassword')->passwordInput(['class'=>'txt']);
             echo $form->field($model,'email')->textInput(['class'=>'txt']);
             echo $form->field($model,'tel')->textInput(['class'=>'txt']);
+            //短信验证
+            $button =  Html::button('发送短信验证码',['id'=>'send_sms_button']);
+            echo $form->field($model,'messageCode',['options'=>['class'=>'checkcode'],'template'=>"{label}\n{input}$button\n{hint}\n{error}"])->textInput(['class'=>'txt']);
+            //验证码
             echo $form->field($model,'code',['options'=>['class'=>'checkcode']])->widget(\yii\captcha\Captcha::className(),['template'=>'{input}{image}']);
             echo '<li><label>&nbsp;</label></label><input type="checkbox" class="chb" checked="checked" /> 我已阅读并同意《用户注册协议》</li>';
             //echo \yii\helpers\Html::submitButton('注册');
@@ -46,3 +53,23 @@
     </div>
 </div>
 <!-- 登录主体部分end -->
+<?php
+$url = \yii\helpers\Url::to(['member/send-sms']);
+$this->registerJs(new \yii\web\JsExpression(
+    <<<JS
+    $("#send_sms_button").click(function(){
+        //发送验证码按钮被点击时
+        //手机号
+        var tel = $("#member-tel").val();
+        //AJAX post提交tel参数到 member/send-sms
+        $.post('$url',{tel:tel},function(data){
+            if(data == 'success'){
+                console.log('短信发送成功');
+                alert('短信发送成功');
+            }else{
+                console.log(data);
+            }
+        });
+    });
+JS
+));

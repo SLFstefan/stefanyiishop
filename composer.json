@@ -21,7 +21,8 @@
         "xj/yii2-uploadify-widget": "~2.0.0",
         "crazyfd/yii2-qiniu": "dev-master",
         "creocoder/yii2-nested-sets": "0.9.*",
-        "crazyfd/yii2-ueditor": "dev-master"
+        "crazyfd/yii2-ueditor": "dev-master",
+        "flc/alidayu": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

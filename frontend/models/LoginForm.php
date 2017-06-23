@@ -37,8 +37,10 @@ class LoginForm extends Model{
             if(!\Yii::$app->security->validatePassword($this->password,$user->password_hash)){
                 $this->addError('username','用户名或密码错误');
             }else{
+                //保存随机cookie字符串
                 $user->generateAuthKey();
                 $user->save(false);
+                //设置生命周期，在main里面配置authTimeout
                 $cookie=\Yii::$app->user->authTimeout;
                 //验证成功，登录
                 \Yii::$app->user->login($user,$this->cookie?$cookie:0);
