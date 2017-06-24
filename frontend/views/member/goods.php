@@ -184,7 +184,7 @@ use \yii\helpers\Html;
                     <li><span>上架时间：</span><?=date('Y-m-d G:i:s',$goods->create_time)?></li>
                     <li class="star"><span>商品评分：</span> <strong></strong><a href="">(已有21人评价)</a></li> <!-- 此处的星级切换css即可 默认为5星 star4 表示4星 star3 表示3星 star2表示2星 star1表示1星 -->
                 </ul>
-                <form action="" method="post" class="choose">
+                <form action="<?=\yii\helpers\Url::to(['member/add-cart'])?>" method="post" class="choose">
                     <ul>
 
                         <li>
@@ -192,7 +192,7 @@ use \yii\helpers\Html;
                                 <dt>购买数量：</dt>
                                 <dd>
                                     <a href="javascript:;" id="reduce_num"></a>
-                                    <input type="text" name="amount" value="1" class="amount"/>
+                                    <input type="text" name="number" value="1" class="amount"/>
                                     <a href="javascript:;" id="add_num"></a>
                                 </dd>
                             </dl>
@@ -203,6 +203,8 @@ use \yii\helpers\Html;
                                 <dt>&nbsp;</dt>
                                 <dd>
                                     <input type="submit" value="" class="add_btn" />
+                                    <input type="hidden" name="goods_id" value="<?=$goods->id?>"/>
+                                    <input type="hidden" name="_csrf-frontend" id="_csrf-frontend" value="<?=Yii::$app->request->csrfToken?>"/>
                                 </dd>
                             </dl>
                         </li>

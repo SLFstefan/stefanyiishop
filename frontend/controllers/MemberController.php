@@ -5,11 +5,14 @@ namespace frontend\controllers;
 use backend\models\Goods;
 use backend\models\GoodsCategory;
 use frontend\models\Address;
+use frontend\models\Cart;
 use frontend\models\Locations;
 use frontend\models\LoginForm;
 use frontend\models\Member;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
+use yii\web\Cookie;
+use yii\web\NotFoundHttpException;
 
 class MemberController extends \yii\web\Controller
 {
@@ -202,6 +205,145 @@ class MemberController extends \yii\web\Controller
             ->setHtmlBody('<b style="color: lightseagreen">岁月如歌，一曲终了，总有人不愿散场</b>')//邮件的内容 html格式
             ->send();
         var_dump($result);
+    }
+    //添加商品到购物车
+    public function actionAddCart(){
+        //接收商品ID和商品数量
+        $goods_id=\Yii::$app->request->post('goods_id');
+        $number=\Yii::$app->request->post('number');
+        //根据商品ID查找对应商品
+        $goods=Goods::findOne(['id'=>$goods_id]);
+        if($goods==null){
+            throw new NotFoundHttpException('无相关商品');
+        }
+        //判断用户是否登录
+        if(\Yii::$app->user->isGuest){
+            //实例化cookie
+            $cookies=\Yii::$app->request->cookies;
+            //先获取cookie中的购物车数据
+            $cookie=$cookies->get('cart');
+            if($cookie==null){
+                //cookie中无购物车数据
+                $cart=[];
+            }else{
+                $cart=unserialize($cookie->value);
+            }
+            //将新增的商品和之前购物车中的商品合并
+            $cookies=\Yii::$app->response->cookies;
+            //检查购物车中是否有改商品
+            if(key_exists($goods->id,$cart)){
+                $cart[$goods_id]+=$number;
+            }else{
+                $cart[$goods_id]=$number;
+            }
+            //保存到cookie中
+            $cookie=new Cookie([
+                'name'=>'cart','value'=>serialize($cart)
+                ]
+            );
+            $cookies->add($cookie);
+        }else{
+            //已登录
+            //判断收据库中是否有该用户买了该商品
+            $model=Cart::findOne(['goods_id'=>$goods_id,'member_id'=>\Yii::$app->user->identity->getId()]);
+            if($model){
+                $model->amount=$model->amount+$number;
+                $model->save();
+            }else{
+                $model=new Cart();
+                $model->amount=$number;
+                $model->goods_id=$goods_id;
+                $model->member_id=\Yii::$app->user->identity->getId();
+                $model->save();
+            }
+        }
+        return $this->redirect(['member/cart']);
+    }
+    //购物车
+    public function actionCart(){
+        $this->layout='cart';
+        //判断是否登录
+        if(\Yii::$app->user->isGuest){
+            //从cookie中读取数据
+            $cookies=\Yii::$app->request->cookies;
+            $cookie=$cookies->get('cart');
+            if($cookie==null){
+                $cart=[];
+            }else{
+                $cart=unserialize($cookie->value);
+            }
+            $models=[];
+            //循环读取cookie中的数据,在购物车中显示
+            foreach ($cart as $goods_id=>$number){
+                $goods=Goods::findOne(['id'=>$goods_id])->attributes;
+                $goods['number']=$number;
+                $models[]=$goods;
+            }
+        }else{
+            //已登录
+            //读取数据库中所有的购物车数据
+            $carts=Cart::find()->where(['member_id'=>\Yii::$app->user->identity->getId()])->all();
+            //遍历
+            $models=[];
+            foreach ($carts as $car){
+                //根据购物车的商品ID查找对应商品
+                $good=Goods::findOne(['id'=>$car->goods_id])->attributes;
+                $good['number']=$car->amount;
+                $models[]=$good;
+            }
+        }
+        return $this->render('cart',['models'=>$models]);
+    }
+    //更新购物车
+    public function actionUpdateCart(){
+        //接收商品ID和商品数量
+        $goods_id=\Yii::$app->request->post('goods_id');
+        $number=\Yii::$app->request->post('number');
+        //根据商品ID查找对应商品
+        $goods=Goods::findOne(['id'=>$goods_id]);
+        if($goods==null){
+            throw new NotFoundHttpException('无相关商品');
+        }
+        //判断用户是否登录
+        if(\Yii::$app->user->isGuest){
+            //实例化cookie
+            $cookies=\Yii::$app->request->cookies;
+            //先获取cookie中的购物车数据
+            $cookie=$cookies->get('cart');
+            if($cookie==null){
+                //cookie中无购物车数据
+                $cart=[];
+            }else{
+                $cart=unserialize($cookie->value);
+            }
+            //将新增的商品和之前购物车中的商品合并
+            $cookies=\Yii::$app->response->cookies;
+            //判断商品数量是否为零,为零则删除该商品
+            if($number){
+                $cart[$goods_id]=$number;
+            }else{
+                if(key_exists($goods->id,$cart))unset($cart[$goods_id]);
+            }
+
+            //保存到cookie中
+            $cookie=new Cookie([
+                    'name'=>'cart','value'=>serialize($cart)
+                ]
+            );
+            $cookies->add($cookie);
+        }else{
+            //已登录
+            //根据用户ID和商品ID查找对应的记录
+            $car=Cart::findOne(['goods_id'=>$goods_id,'member_id'=>\Yii::$app->user->identity->getId()]);
+            if($number){
+                //跟新数据记录
+                $car->amount=$number;
+                $car->save();
+            }else{
+                //删除记录
+                $car->delete();
+            }
+        }
     }
 
 }

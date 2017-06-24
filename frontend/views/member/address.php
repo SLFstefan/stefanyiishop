@@ -104,9 +104,9 @@
             echo $form->field($model,'city_id')->hiddenInput();
             echo $form->field($model,'area_id')->hiddenInput();
             echo '所在地区：<select name="province"><option>请选择省份</option></select><select name="city"><option>请选择城市</option></select><select name="area"><option>请选择区县</option></select>';
-            $province_id = $model->province_id;
-            $city_id=$model->city_id;
-            $area_id=$model->area_id;
+            $province_id = $model->province_id?$model->province_id:0;
+            $city_id=$model->city_id?$model->city_id:0;
+            $area_id=$model->area_id?$model->area_id:0;
             $js=new \yii\web\JsExpression(
                     <<<JS
                 //因为我们首先要选择省份，所以我们要准备省份数据
@@ -119,13 +119,12 @@
 				$.getJSON('read.html',data,function(response){
 					//因为PHP返回了多条数据，所以我们需要遍历response
 					$(response).each(function(i,v){
-					    if( v.id == $province_id){
-					         var html='<option value="'+v.id+'" selected>'+v.name+'</option>';  
+                        if( v.id ==$province_id){
+                            var html='<option value="'+v.id+'" selected>'+v.name+'</option>';  
 					    }else{
 					        //因为插入的文本可能会很长，所以我们将文本放入到一个变量中方便使用
 						    var html='<option value="'+v.id+'">'+v.name+'</option>';
-					    }
-					
+					    }				
 						//因为我们需要将数据放入select下拉框中，所以我们通过HTML将数据放入到下拉框中
 						$(html).appendTo('select[name=province]');
 					   
@@ -151,8 +150,8 @@
 				$.getJSON('read.html',data,function(response){
 					//因为PHP返回了多条数据，所以我们需要遍历response
 					$(response).each(function(i,v){
-					        if( v.id==$city_id){
-					            var html='<option value="'+v.id+'" selected>'+v.name+'</option>';
+                            if( v.id==$city_id){
+                                var html='<option value="'+v.id+'" selected>'+v.name+'</option>';
 					        }else{
 					            //因为插入的文本可能会很长，所以我们将文本放入到一个变量中方便使用
                                 var html='<option value="'+v.id+'">'+v.name+'</option>';
@@ -180,8 +179,8 @@
 				$.getJSON('read.html',data,function(response){
 					//因为PHP返回了多条数据，所以我们需要遍历response
 					$(response).each(function(i,v){
-					    if( v.id==$area_id){
-					         var html='<option value="'+v.id+'" selected>'+v.name+'</option>';
+                        if(v.id == $area_id){
+                            var html='<option value="'+v.id+'" selected>'+v.name+'</option>';
 					    }else{
 					        //因为插入的文本可能会很长，所以我们将文本放入到一个变量中方便使用
 						    var html='<option value="'+v.id+'">'+v.name+'</option>';
@@ -196,7 +195,6 @@
 			    $('#address-area_id').val($('select[name=area]').val());
 			});
 JS
-
             );
             //加载js
             $this->registerJs($js);
