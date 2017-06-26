@@ -12,6 +12,7 @@ use frontend\models\Member;
 use frontend\models\Order;
 use frontend\models\OrderGoods;
 use yii\data\Pagination;
+use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\Cookie;
 use yii\web\NotFoundHttpException;
@@ -378,7 +379,7 @@ class MemberController extends \yii\web\Controller
         $this->layout='order';
         $model=new Order();
         //读取该用户的所有购物车数据
-        $carts=Cart::find()->where(['member_id'=>\Yii::$app->user->identity->getId()])->all();
+        $carts=Cart::find()->where(['member_id'=>\Yii::$app->user->id])->all();
         //读取所有收货地址信息
         $addresses=Address::find()->all();
         return $this->render('order',['model'=>$model,'addresses'=>$addresses,'carts'=>$carts]);
@@ -403,7 +404,7 @@ class MemberController extends \yii\web\Controller
             }
         }
         //根据收货地址ID查询地址
-        $address=Address::findOne(['id'=>$address_id]);
+        $address=Address::findOne(['id'=>$address_id,'member_id'=>\Yii::$app->user->id]);
         //保存订单表
         if($order->validate()){
             $order->member_id=\Yii::$app->user->identity->getId();
@@ -425,28 +426,48 @@ class MemberController extends \yii\web\Controller
                 $order->status=1;
             }
             $order->create_time=time();
-            $order->save();
-            //保存订单商品表
-            //根据用户ID找到购物车的记录
-            $carts=Cart::find()->where(['member_id'=>\Yii::$app->user->identity->getId()])->all();
-            foreach ($carts as $cart){
-                $order_goods=new OrderGoods();
-                if($order_goods->validate()){
-                    $order_goods->order_id=$order->id;
-                    $goods=Goods::findOne(['id'=>$cart->goods_id]);
-                    $order_goods->goods_id=$cart->goods_id;
-                    $order_goods->goods_name=$goods->name;
-                    $order_goods->logo=$goods->logo;
-                    $order_goods->price=$goods->shop_price;
-                    $order_goods->amount=$cart->amount;
-                    $order_goods->total=$cart->amount*$goods->shop_price;
-                    $order_goods->save();
-                    $cart->delete();
-                }else{
-                    var_dump($order_goods->getErrors());
-                    exit;
+            //开启事务
+            $transaction=\Yii::$app->db->beginTransaction();
+            try{
+                $order->save();
+                //保存订单商品表
+                //根据用户ID找到购物车的记录
+                $carts=Cart::find()->where(['member_id'=>\Yii::$app->user->id])->all();
+                foreach ($carts as $cart){
+                    $order_goods=new OrderGoods();
+                    if($order_goods->validate()){
+                        $order_goods->order_id=$order->id;
+                        $goods=Goods::findOne(['id'=>$cart->goods_id]);
+                        if($goods==null){
+                            throw new Exception('该商品已下架');
+                        }
+                        if($goods->stock<$cart->amount){
+                            throw new Exception('该商品库存不足');
+                        }
+                        $order_goods->goods_id=$cart->goods_id;
+                        $order_goods->goods_name=$goods->name;
+                        $order_goods->logo=$goods->logo;
+                        $order_goods->price=$goods->shop_price;
+                        $order_goods->amount=$cart->amount;
+                        $order_goods->total=$cart->amount*$goods->shop_price;
+                        $order_goods->save();
+                        //商品库存对应减少
+                        $goods->stock-=$cart->amount;
+                        $goods->save();
+                        //清除购物车记录
+                        $cart->delete();
+                    }else{
+                        var_dump($order_goods->getErrors());
+                        exit;
+                    }
                 }
+                //提交
+                $transaction->commit();
+            }catch (Exception $e){
+                //回滚
+                $transaction->rollBack();
             }
+
         }else{
             var_dump($order->getErrors());
             exit;
@@ -457,5 +478,11 @@ class MemberController extends \yii\web\Controller
         $this->layout='success';
         return $this->render('success');
     }
-
+    //我的订单
+    public function actionMyOrder(){
+        $this->layout='index';
+        //获取当前用户的订单
+        $orders=Order::find()->where(['member_id'=>\Yii::$app->user->id])->all();
+        return $this->render('my-order',['orders'=>$orders]);
+    }
 }

@@ -40,6 +40,17 @@ class Order extends \yii\db\ActiveRecord
         ['id'=>4,'name'=>'邮局汇款','description'=>'通过快钱平台收款 汇款后1-3个工作日到账'],
     ];
     public $address_id;
+    public static $status_options=[
+        0=>'已取消',
+        1=>'待付款',
+        2=>'待发货',
+        3=>'待收货',
+        4=>'完成',
+    ];
+    //定单与订单商品建立一对多的关联关系
+    public function getGoods(){
+        return $this->hasMany(OrderGoods::className(),['order_id'=>'id']);
+    }
     /**
      * @inheritdoc
      */
