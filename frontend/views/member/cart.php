@@ -3,8 +3,6 @@
  * @var $this \yii\web\View
  */
 use yii\helpers\Html;
-$this->registerCssFile('@web/style/cart.css');
-$this->registerJsFile('@web/js/cart1.js',['depends'=>\yii\web\JqueryAsset::className()]);
 ?>
 <!-- 主体部分 start -->
 <div class="mycart w990 mt10 bc">
@@ -42,7 +40,7 @@ $this->registerJsFile('@web/js/cart1.js',['depends'=>\yii\web\JqueryAsset::class
     </table>
     <div class="cart_btn w990 bc mt10">
         <a href="<?=\yii\helpers\Url::to(['member/index'])?>" class="continue">继续购物</a>
-        <a href="" class="checkout">结 算</a>
+        <a href="<?php if(Yii::$app->user->isGuest){echo \yii\helpers\Url::to(['member/login']);}else{echo \yii\helpers\Url::to(['member/order']);}?>" class="checkout">结 算</a>
     </div>
 </div>
 <!-- 主体部分 end -->

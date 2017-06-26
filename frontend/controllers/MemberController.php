@@ -9,6 +9,8 @@ use frontend\models\Cart;
 use frontend\models\Locations;
 use frontend\models\LoginForm;
 use frontend\models\Member;
+use frontend\models\Order;
+use frontend\models\OrderGoods;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
 use yii\web\Cookie;
@@ -60,6 +62,32 @@ class MemberController extends \yii\web\Controller
             $member->last_login_ip=\Yii::$app->request->getUserIP();
             //保存
             $member->save(false);
+            //用户登录成功，将cookie中的数据同步到数据表
+            //从cookie中读取数据
+            $cookies=\Yii::$app->request->cookies;
+            $cookie=$cookies->get('cart');
+            if($cookie==null){
+                $cart=[];
+            }else{
+                $cart=unserialize($cookie->value);
+            }
+            //循环读取cookie中的购物车数据
+            foreach ($cart as $goods_id=>$number){
+                $car=Cart::findOne(['goods_id'=>$goods_id,'member_id'=>\Yii::$app->user->identity->getId()]);
+                if($car){
+                    $car->amount+=$number;
+                    $car->save();
+                }else{
+                    $car=new Cart();
+                    $car->member_id=\Yii::$app->user->identity->getId();
+                    $car->goods_id=$goods_id;
+                    $car->amount=$number;
+                    $car->save();
+                }
+            }
+            //同步成功，清除cookie中的数据
+            $cookies=\Yii::$app->response->cookies;
+            $cookies->remove('cart');
             //跳转到用户界面
             return $this->redirect(['member/index']);
         }
@@ -344,6 +372,90 @@ class MemberController extends \yii\web\Controller
                 $car->delete();
             }
         }
+    }
+    //订单
+    public function actionOrder(){
+        $this->layout='order';
+        $model=new Order();
+        //读取该用户的所有购物车数据
+        $carts=Cart::find()->where(['member_id'=>\Yii::$app->user->identity->getId()])->all();
+        //读取所有收货地址信息
+        $addresses=Address::find()->all();
+        return $this->render('order',['model'=>$model,'addresses'=>$addresses,'carts'=>$carts]);
+    }
+    //添加订单
+    public function actionAddOrder(){
+        $order=New Order();
+        $delivery_id=\Yii::$app->request->post('delivery_id');
+        $address_id=\Yii::$app->request->post('address_id');
+        $payment_id=\Yii::$app->request->post('payment_id');
+        $total_money=\Yii::$app->request->post('total_money');
+        //根据送货方式ID查询送货方式
+        foreach (Order::$delivery_options as $deliverys){
+            if($deliverys['id']==$delivery_id){
+                $delivery=$deliverys;
+            }
+        }
+        //根据支付方式ID查询支付方式
+        foreach (Order::$payment_options as $payments){
+            if($payments['id']==$payment_id){
+                $payment=$payments;
+            }
+        }
+        //根据收货地址ID查询地址
+        $address=Address::findOne(['id'=>$address_id]);
+        //保存订单表
+        if($order->validate()){
+            $order->member_id=\Yii::$app->user->identity->getId();
+            $order->name=$address->name;
+            $order->province=$address->province->name;
+            $order->city=$address->city->name;
+            $order->area=$address->area->name;
+            $order->address=$address->detail_address;
+            $order->tel=$address->phone;
+            $order->delivery_id=$delivery['id'];
+            $order->delivery_name=$delivery['name'];
+            $order->delivery_price=$delivery['price'];
+            $order->payment_id=$payment['id'];
+            $order->payment_name=$payment['name'];
+            $order->total=$total_money;
+            if($delivery['id']==1){
+                $order->status=2;
+            }else{
+                $order->status=1;
+            }
+            $order->create_time=time();
+            $order->save();
+            //保存订单商品表
+            //根据用户ID找到购物车的记录
+            $carts=Cart::find()->where(['member_id'=>\Yii::$app->user->identity->getId()])->all();
+            foreach ($carts as $cart){
+                $order_goods=new OrderGoods();
+                if($order_goods->validate()){
+                    $order_goods->order_id=$order->id;
+                    $goods=Goods::findOne(['id'=>$cart->goods_id]);
+                    $order_goods->goods_id=$cart->goods_id;
+                    $order_goods->goods_name=$goods->name;
+                    $order_goods->logo=$goods->logo;
+                    $order_goods->price=$goods->shop_price;
+                    $order_goods->amount=$cart->amount;
+                    $order_goods->total=$cart->amount*$goods->shop_price;
+                    $order_goods->save();
+                    $cart->delete();
+                }else{
+                    var_dump($order_goods->getErrors());
+                    exit;
+                }
+            }
+        }else{
+            var_dump($order->getErrors());
+            exit;
+        }
+    }
+    //提交订单成功
+    public function actionSuccess(){
+        $this->layout='success';
+        return $this->render('success');
     }
 
 }

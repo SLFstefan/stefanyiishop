@@ -50,11 +50,11 @@ use yii\helpers\Html;
     <div class="header w990 bc mt15">
         <div class="logo w990">
             <h2 class="fl"><a href="index.html"><?=Html::img('@web/images/logo.png',['alt'=>'京西商城'])?></a></h2>
-            <div class="flow fr">
+            <div class="flow fr flow3">
                 <ul>
-                    <li class="cur">1.我的购物车</li>
+                    <li>1.我的购物车</li>
                     <li>2.填写核对订单信息</li>
-                    <li>3.成功提交订单</li>
+                    <li class="cur">3.成功提交订单</li>
                 </ul>
             </div>
         </div>
