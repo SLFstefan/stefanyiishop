@@ -19,6 +19,7 @@ class CleanController extends Controller{
                 foreach ($order->goods as $Order_goods){
                     $goods=Goods::findOne(['id'=>$Order_goods->goods_id]);
                     $goods->stock+=$Order_goods->amount;
+                    $goods->save();
                 }
             }
         }

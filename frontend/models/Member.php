@@ -32,6 +32,7 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
     public $cookie;
     public $messageCode;
     const SCENARIO_REGISTER='register';
+    const SCENARIO_API_REGISTER = 'api_register';//api注册
     /**
      * @inheritdoc
      */
@@ -54,6 +55,7 @@ class Member extends \yii\db\ActiveRecord implements IdentityInterface
             [['password_hash', 'email'], 'string', 'max' => 100],
             [['tel'], 'string', 'max' => 11],
             [['code'],'captcha','on'=>self::SCENARIO_REGISTER],
+            ['code','captcha','on'=>self::SCENARIO_API_REGISTER,'captchaAction'=>'api/captcha'], //API验证码验证
             [['repassword'], 'compare','compareAttribute'=>'password','on'=>self::SCENARIO_REGISTER],
             [['cookie'],'safe'],
             //验证短信验证码
